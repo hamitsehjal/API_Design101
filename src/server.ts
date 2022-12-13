@@ -8,19 +8,14 @@ import path from "path"
 import { createNewUser, signin } from "./handlers/users"
 const app = express()
 
-const customLogger = (message) => ((req, res, next) => {
 
-    console.log(`Hello from ${message}`);
-    next();
-})
 
 
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use(customLogger("custome Logger"))
-// customized middleware
+
 
 app.use((req, res, next) => {
 

@@ -3,25 +3,19 @@ import { dirname } from "path";
 import { body, oneOf, validationResult } from 'express-validator'
 import { handleInputValidation } from './modules/middleware'
 import path from "path"
+import { createProduct, getProducts } from "./handlers/products";
 const router = Router();
 
 // PRODUCT
-router.get("/products", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"))
-
-})
+router.get("/products", getProducts)
 
 router.get("/product/:id", () => {
 
 })
 
-router.post("/product", body("name").isString(), handleInputValidation, (req, res) => {
+router.post("/product", body("name").isString(), handleInputValidation, createProduct)
 
-})
-
-router.put("/product/:id", body("name").isString(), handleInputValidation, (req, res) => {
-
-})
+router.put("/product/:id", body("name").isString(), handleInputValidation, )
 
 router.delete("/product/:id", () => {
 
