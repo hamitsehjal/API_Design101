@@ -3,51 +3,41 @@ import { dirname } from "path";
 import { body, oneOf, validationResult } from 'express-validator'
 import { handleInputValidation } from './modules/middleware'
 import path from "path"
-import { createProduct, getProducts } from "./handlers/products";
+import { createProduct, deleteProduct, getOneProduct, getProducts } from "./handlers/products";
+import { createUpdate, deleteUpdate, getOneUpdate, getUpdates, updateUpdate } from "./handlers/updates";
 const router = Router();
 
 // PRODUCT
 router.get("/products", getProducts)
 
-router.get("/product/:id", () => {
-
-})
+router.get("/product/:id", getOneProduct)
 
 router.post("/product", body("name").isString(), handleInputValidation, createProduct)
 
-router.put("/product/:id", body("name").isString(), handleInputValidation, )
+router.put("/product/:id", body("name").isString(), handleInputValidation,)
 
-router.delete("/product/:id", () => {
+router.delete("/product/:id", deleteProduct)
 
-})
+
 // UPDATE
-router.get("/update", () => {
+router.get("/update", getUpdates)
 
-})
-
-router.get("/update/:id", () => {
-
-})
+router.get("/update/:id", getOneUpdate)
 
 router.post("/update",
     body('title').exists().isString(),
     body('body').exists().isString(),
-    () => {
-
-    })
+    body('productId').exists().isString(),
+    createUpdate)
 
 router.put("/update/:id",
     body('title').optional(),
     body('body').optional(),
-    body('status').isIn(['IN_PROGRESS','LIVE','DEPRECATED','ARCHIVED']),
+    body('status').isIn(['IN_PROGRESS', 'LIVE', 'DEPRECATED', 'ARCHIVED']).optional(),
     body('version').optional(),
-    (req, res) => {
+    updateUpdate)
 
-    })
-
-router.delete("/update/:id", () => {
-
-})
+router.delete("/update/:id", deleteUpdate)
 
 // UPDATEPOINTS
 router.get("/updatePoint", () => {
