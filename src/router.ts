@@ -5,6 +5,7 @@ import { handleInputValidation } from './modules/middleware'
 import path from "path"
 import { createProduct, deleteProduct, getOneProduct, getProducts } from "./handlers/products";
 import { createUpdate, deleteUpdate, getOneUpdate, getUpdates, updateUpdate } from "./handlers/updates";
+import app from "./server";
 const router = Router();
 
 // PRODUCT
@@ -67,4 +68,14 @@ router.delete("/updatePoint/:id", () => {
 
 })
 
+app.use((err, req, res, next) => {
+    if (err.type === "auth") {
+        res.status(401).json({ message: "Damm, You are Unauthorized!!" })
+    } else if (err.type === "input") {
+        res.status(400).json({ message: "Dammn, Bad Input" })
+    } else {
+        res.status(500).json({ message: "Oh shoot, that's on us!!" })
+    }
+
+})
 export default router;
