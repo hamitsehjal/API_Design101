@@ -68,7 +68,7 @@ router.delete("/updatePoint/:id", () => {
 
 })
 
-app.use((err, req, res, next) => {
+router.use((err, req, res, next) => {
     if (err.type === "auth") {
         res.status(401).json({ message: "Damm, You are Unauthorized!!" })
     } else if (err.type === "input") {

@@ -1,7 +1,8 @@
 
 import app from "./server"
-app.listen(8080, () => {
+import config from "./config"
+app.listen(config.port, () => {
     console.log(
-        "Express Server listening on port 8080"
+        `Express Server listening on port ${config.port}`
     )
 })
