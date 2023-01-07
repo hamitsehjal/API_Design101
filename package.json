@@ -34,7 +34,9 @@
   },
   "scripts": {
     "test":"jest",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p tsconfig.json",
+  "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",

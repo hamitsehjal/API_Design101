@@ -23,10 +23,8 @@ app.use((req, res, next) => {
 })
 
 app.get("/", (req, res) => {
-    throw new Error("hewllo")
-    console.log("Hellow from Express!!")
-    res.status(200);
-    res.sendFile(path.join(__dirname, "index.html"))
+
+    res.status(200).json({ message: "hello" })
 })
 
 app.use("/api", protect, router);
